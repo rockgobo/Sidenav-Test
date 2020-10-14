@@ -1,0 +1,481 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+
+
+
+/* root element for accordion. decorated with rounded borders and gradient background image */
+.toolsaccordion {
+    background: #333333 url(/img/global/gradient/h600.png) 0 0;
+    width: 300px;
+    border: 1px solid #333333;
+}
+
+    /* accordion header */
+    .toolsaccordion h3 {
+        background: #cccccc url(/img/global/gradient/h30.png);
+        margin: 0;
+        padding: 5px 15px;
+        font-size: 14px;
+        font-weight: normal;
+        border: 1px solid #ffffff;
+        border-bottom: 1px solid #dddddd;
+        cursor: pointer;
+    }
+
+        /* currently active header */
+        .toolsaccordion h3.current {
+            cursor: default;
+            background-color: #ffffff;
+        }
+
+    /* accordion pane */
+    .toolsaccordion div.pane {
+        border: 1px solid #ffffff;
+        border-width: 0 2px;
+        display: none;
+        padding: 15px;
+        color: #ffffff;
+        font-size: 12px;
+    }
+
+        /* entry inside pane with no link */
+        .toolsaccordion div.pane div {
+            color: #ffffff;
+        }
+
+        /* a title inside pane */
+        .toolsaccordion div.pane h3 {
+            font-weight: normal;
+            margin: 0 0 -5px 0;
+            font-size: 16px;
+            color: #999999;
+        }
+
+    .toolsaccordion A:link, .toolsaccordion A:visited, .toolsaccordion A:active {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .toolsaccordion H3 A:link, .toolsaccordion H3 A:visited, .toolsaccordion H3 A:active {
+        color: #333333;
+    }
+/* 
+ul{
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+}
+
+ul li, 
+ul li li{
+	text-decoration: none;
+	list-style: none !important;
+
+}
+
+a:hover{
+	text-decoration: none;
+}
+
+a, a:visited{
+	text-decoration: none;
+	color: white;
+} */
+
+/* .MySideNav{
+		margin-left: 0 !important;
+		width: 100%;
+		background-color: rgb(78,120,157);
+		color: white;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+		border-bottom-left-radius: 10px;
+		border-bottom-right-radius: 10px;
+} */
+/* 
+.rpLevel1{
+	background-color: rgb(148,148,148);
+	border-bottom: 1px solid white;  
+	margin-left: 0;
+	border-top: 1px solid white;
+	min-height: 22px;
+	display: block;
+	padding-left: 7.5px;
+
+}
+
+.rpLevel0{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: -11.5px;
+
+}
+.first .rpItem .rpLevel0{
+	border-bottom: 2px solid white;
+}
+
+/* .selected:active{
+	/* border-bottom: 2px solid white; 
+	color: yellow;
+} */
+
+
+/* 
+@media (min-width: 0px) and (max-width: 1201px){
+	.columnPanes .columnLeft {
+	width: 100%;
+	}
+}
+@media (min-width: 1201px){
+	.columnPanes .columnLeft {
+	width: 100%;
+	}
+}
+
+.fontA{
+	float: right;
+	padding-right: 7.5px;
+} */
+
+/* li .rpItem .rpLevel0{
+	padding-top: 10px;
+
+}
+li .first .rpItem .rpLevel0{
+	padding-top: 10px;
+
+	
+}
+li .last .rpItem .rpLevel0{
+	padding-top: 10px;
+
+}
+
+
+
+.first .rpItem .rpLevel0:hover{
+	background-color: rgb(2,62,115);
+}
+ */
+
+/* 
+
+.rpRootGroup .rpLevel1{
+	margin-left: 5px;
+	padding-top: 5px;
+}
+.rpRootGroup .rpLevel1:hover{
+	background-color: rgb(102,102,102);
+}
+
+a, a:visited, a:link{
+	color: white;
+	text-decoration: none;
+}
+
+ul .rpRootGroup .rpLevel1{
+	margin-left: 0;
+}
+
+.rbAbstand{
+	margin-top: 7.5px;
+}
+
+li  .last .rpItem .rpLevel1 {
+	border-bottom: 2px solid white;
+	padding-left: 10px;
+}
+ */
+
+/* ul .rpGroup .rpLevel1{
+	margin-left: -0px;
+} */
+
+/* .rpLevel2{
+	border-left:1px solid #ffffff;
+	max-height: 100%;
+
+}
+
+li .rpItem .rpLevel2{
+	padding-left: 10px;
+    margin-top: -5px;
+    padding-top: 5px;
+    margin-bottom: -5;
+    padding-bottom: 3px;
+    margin-left: -7.5;
+}
+
+li .rpItem .rpLevel2:hover{
+	background-color: rgb(204,204,204);
+}
+
+.hide{ 
+	background-color: rgb(148,148,148);
+}
+.hide:hover{
+	background-color: rgb(148,148,148);
+}  */
+
+
+/* MySideNav Razor Template/CSHTML */
+
+.MySideNav {
+    background-color: rgb(255,255,255);
+    width: 100%;
+}
+
+ul li, ul li li {
+    list-style-type: none !important;
+}
+
+
+/* li > a{
+	width: 100%;
+	/* background-color: rgb(78,120,157); 
+} */
+
+li .first {
+    border: 1px black solid;
+    width: 100%;
+    /* background-color: green; */
+    height: auto;
+}
+
+li {
+    display: inline-block;
+}
+
+    li ul {
+        background-color: rgb(255, 255, 255);
+    }
+
+    li .first ul {
+        background-color: rgb(255, 255, 255);
+    }
+
+    li .first ul {
+        background-color: rgb(255, 255, 50) !important;
+    }
+
+        li .first ul a {
+            width: 100%;
+            background-color: rgb(255, 255, 50) !important;
+        }
+
+    li .first .last ul li a {
+        width: 100%;
+        left: 0;
+    }
+
+
+.SideNavContainer {
+    width: 240px;
+    height: auto;
+    background-color: white;
+}
+
+/* .first{
+	background-color: rgb(78,120,157);
+
+} */
+
+/* a{
+	background-color: lightcoral;
+} */
+
+.node {
+    background-color: rgb(78,120,157);
+    padding: 2px 10px 2px 10px;
+}
+
+    .node a {
+        color: white;
+        text-decoration: none;
+    }
+/* .node:hover{
+	background-color: rgb(255,165,0);
+} */
+
+/* .first,.selected> .node{ 
+	background-color: rgb(255,165,0);
+} */
+
+.SideNavContainer > .first > .node > .SideNavContainer > .node {
+    visibility: hidden;
+}
+
+.level-0 {
+    border-bottom: 2px solid white;
+    display: block;
+}
+
+    .level-0:hover {
+        background-color: rgb(2,62,115);
+    }
+
+.level-1 {
+    background-color: rgb(148,148,148);
+    border-bottom: 2px solid white;
+    /* margin-left: 10px; */
+    display: block;
+}
+
+
+    .level-1:hover {
+        background-color: rgb(102,102,102);
+    }
+
+.level-2 {
+    background-color: rgb(148,148,148);
+    border-bottom: 2px solid white;
+    /* margin-left: 20px; */
+    /* display: none; */
+    /* display: none; */
+}
+
+    .level-2:hover {
+        background-color: rgb(102,102,102);
+    }
+
+
+    /* Hover für Parent-Elements*/
+    .level-2 > a:hover {
+        color: white;
+        text-decoration: none;
+    }
+
+.level-1 > a:hover {
+    color: white;
+    text-decoration: None;
+}
+
+.level-0 > a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+/* .last > .node, .level-0{
+	border-top: 2px solid white;
+} */
+
+.first > .level-0 {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.last > .level-0 {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.expand0 {
+    /* margin-left: 20px; */
+    float: right;
+    /* background-image: url('http://web-dev.neps-data.de/dnn9/Portals/_default/Skins/ProjectNeps/expand.gif'); */
+    width: 15px;
+    height: 15px;
+    color: white;
+}
+
+.collapse0 {
+    /* margin-left: 20px; */
+    float: right;
+    /* background-image: url('http://web-dev.neps-data.de/dnn9/Portals/_default/Skins/ProjectNeps/collapse.gif'); */
+    width: 15px;
+    height: 15px;
+    color: white;
+}
+
+.expand1 {
+    /* margin-left: 20px; */
+    float: right;
+    /* background-image: url('http://web-dev.neps-data.de/dnn9/Portals/_default/Skins/ProjectNeps/expand.gif'); */
+    width: 15px;
+    height: 15px;
+    color: white;
+}
+
+.imActive {
+    background-color: rgb(255,165,0) !important;
+}
+
+.expandNode {
+    display: none;
+}
+
+.collapseNode {
+    display: block;
+}
+
+.glyphicon {
+}

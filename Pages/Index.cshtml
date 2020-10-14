@@ -1,0 +1,239 @@
+﻿@page
+
+@{
+    var root = new List<NepsSidenav.Model.MenuNode>()
+{
+        new Model.MenuNode()
+        {
+            Id = 1,
+            Breadcrumb = true,
+            Depth = 0,
+            Selected = false,
+            First = true,
+            Last = false,
+            Children = new List<NepsSidenav.Model.MenuNode>()
+{
+                new Model.MenuNode()
+                {
+                    Id = 1,
+                    Breadcrumb = true,
+                    Depth = 1,
+                    Selected = true,
+                    First = true,
+                    Last = false,
+                    Children = new List<NepsSidenav.Model.MenuNode>()
+                    {
+                        new Model.MenuNode()
+                        {
+                            Id = 1,
+                            Breadcrumb = false,
+                            Depth = 2,
+                            Selected = false,
+                            First = true,
+                            Last = false,
+                            Children = new List<Model.MenuNode>()
+                        },
+                        new Model.MenuNode()
+                        {
+                            Id = 2,
+                            Breadcrumb = false,
+                            Depth = 2,
+                            Selected = false,
+                            First = false,
+                            Last = false,
+                            Children = new List<Model.MenuNode>()
+                        },
+                        new Model.MenuNode()
+                        {
+                            Id = 3,
+                            Breadcrumb = false,
+                            Depth = 2,
+                            Selected = false,
+                            First = false,
+                            Last = true,
+                            Children = new List<Model.MenuNode>()
+                        }
+                    }
+                },
+                new Model.MenuNode()
+                {
+                    Id = 2,
+                    Breadcrumb = false,
+                    Depth = 1,
+                    Selected = false,
+                    First = false,
+                    Last = false,
+                    Children = new List<Model.MenuNode>()
+                },
+                new Model.MenuNode()
+                {
+                    Id = 3,
+                    Breadcrumb = false,
+                    Depth = 1,
+                    Selected = false,
+                    First = false,
+                    Last = true,
+                    Children = new List<Model.MenuNode>()
+                }
+            }
+        },
+        new Model.MenuNode()
+        {
+            Id = 2,
+            Breadcrumb = false,
+            Depth = 0,
+            Selected = false,
+            First = false,
+            Last = false,
+            Children = new List<Model.MenuNode>()
+        },
+        new Model.MenuNode()
+        {
+            Id = 3,
+            Breadcrumb = false,
+            Depth = 0,
+            Selected = false,
+            First = false,
+            Last = true,
+            Children = new List<NepsSidenav.Model.MenuNode>()
+{
+                new Model.MenuNode()
+                {
+                    Id = 1,
+                    Breadcrumb = false,
+                    Depth = 1,
+                    Selected = false,
+                    First = true,
+                    Last = false,
+                    Children = new List<Model.MenuNode>()
+                },
+                new Model.MenuNode()
+                {
+                    Id = 2,
+                    Breadcrumb = false,
+                    Depth = 1,
+                    Selected = false,
+                    First = false,
+                    Last = false,
+                    Children = new List<Model.MenuNode>()
+                },
+                new Model.MenuNode()
+                {
+                    Id = 3,
+                    Breadcrumb = false,
+                    Depth = 1,
+                    Selected = false,
+                    First = false,
+                    Last = true,
+                    Children = new List<Model.MenuNode>()
+                }
+            }
+        }
+    };
+}
+
+@{
+    void RenderNodes(IList<NepsSidenav.Model.MenuNode> nodes, string id)
+    {
+        if (nodes.Count > 0)
+        {
+            int index = 0;
+
+            <div>
+                @foreach (var node in nodes)
+                {
+
+                    index++;
+
+                    var divGroup = id + "_" + index;
+
+                    var cssClasses = new List<string>();
+
+                    var expandedClass = "expandNode";
+                    if (node.Breadcrumb || node.Depth == 0)
+                    {
+                        expandedClass = "collapseNode";
+                    }
+
+                    if (node.First)
+                    {
+                        cssClasses.Add("first");
+                    }
+
+                    if (node.Last) { cssClasses.Add("last"); }
+                    if (node.Selected) { cssClasses.Add("selected active"); }
+
+
+                    var classString = new Microsoft.AspNetCore.Html.HtmlString((cssClasses.Count == 0) ? "" : (" class=\"" + String.Join(" ", cssClasses.ToArray()) + "\""));
+
+                    <div @classString>
+                        @if (node.Enabled)
+                        {
+                            var imActive = "";
+                            if (node.Selected)
+                            {
+                                imActive = "imActive";
+                            }
+                            
+                            <div class="node level-@node.Depth @imActive">
+                                <a href="@node.Url">@node.Text</a>
+                                <span id="children_@id" type="button" class="sidebar__toggle">
+                                    @if (node.Children.Count > 0)
+                                    {
+                                        <div class="sidebar__toogle__icon">#</div>
+                                    }
+                                </span>
+                            </div>
+                        }
+                        <div class="children_@id @expandedClass">
+                            @{ RenderNodes(node.Children, divGroup); }
+                        </div>
+
+                    </div>
+                }
+            </div>
+        }
+    }
+}
+
+<div class="SideNavContainer">
+    @{ RenderNodes(root, "0"); }
+
+</div>
+
+<script>
+
+    window.onload = function loadmyNav() {
+        initGroups();
+        sidebarToggle();
+    };
+
+    function sidebarToggle() {
+        $('.sidebar__toggle').click(function () {
+            //var id = $(this).attr("id")
+            //toggleDivGroup(id);
+            $(this).parent().next().toggle();
+        })
+
+    }
+
+    function initGroups() {
+        var groupname = $('.selected').attr('class').split(' ').find(function (e) {
+            return e.indexOf('children_' === 0);
+        })
+        console.log(groupname);
+        toggleDivGroup(groupname, true);
+    }
+
+    function toggleDivGroup(groupName, openOnly = false) {
+        $('.' + groupName).children().each(function (index) {
+            if ($(this).hasClass('collapseNode') && !openOnly) {
+                $(this).removeClass('collapseNode');
+                $(this).addClass('expandNode');
+            } else {
+                $(this).removeClass('expandNode');
+                $(this).addClass('collapseNode');
+            }
+        })
+    }
+</script>
