@@ -356,6 +356,7 @@ li {
 .node {
     background-color: rgb(78,120,157);
     padding: 2px 10px 2px 10px;
+    font-size: 11pt;
 }
 
     .node a {
@@ -478,4 +479,22 @@ li {
 }
 
 .glyphicon {
+}
+
+
+.sidebar__toggle {
+    opacity: 0.8;
+    padding: 1px;
+}
+
+    .sidebar__toggle:hover {
+        opacity: 1;
+    }
+
+.sidebar__toggle--show {
+    display: block;
+}
+
+.sidebar__toggle--hide {
+    display: none;
 }

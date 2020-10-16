@@ -1,6 +1,28 @@
 ﻿@page
 
 @{
+
+    List<NepsSidenav.Model.MenuNode> buildTree(int deapth, int count, int currentDeapth = 0, int selecteddeapth = 0, int selectedCount = 0)
+    {
+        List<NepsSidenav.Model.MenuNode> nodes = new List<NepsSidenav.Model.MenuNode>();
+        for (int i = 0; i < count; ++i)
+        {
+            nodes.Add(new Model.MenuNode()
+            {
+                Id = i,
+                Breadcrumb = true,
+                Depth = currentDeapth,
+                Selected = false,
+                First = i == 0 ? true : false,
+                Last = i == count - 1 ? true : false,
+                Children = (deapth > currentDeapth) ? buildTree(deapth, count, currentDeapth + 1) : new List<NepsSidenav.Model.MenuNode>()
+            });
+        }
+
+        return nodes;
+    }
+
+
     var root = new List<NepsSidenav.Model.MenuNode>()
 {
         new Model.MenuNode()
@@ -22,7 +44,7 @@
                     First = true,
                     Last = false,
                     Children = new List<NepsSidenav.Model.MenuNode>()
-                    {
+            {
                         new Model.MenuNode()
                         {
                             Id = 1,
@@ -138,7 +160,6 @@
         if (nodes.Count > 0)
         {
             int index = 0;
-
             <div>
                 @foreach (var node in nodes)
                 {
@@ -150,9 +171,11 @@
                     var cssClasses = new List<string>();
 
                     var expandedClass = "expandNode";
-                    if (node.Breadcrumb || node.Depth == 0)
+                    var openChildren = false;
+                    if (node.Breadcrumb && !node.Selected)
                     {
                         expandedClass = "collapseNode";
+                        openChildren = true;
                     }
 
                     if (node.First)
@@ -166,6 +189,8 @@
 
                     var classString = new Microsoft.AspNetCore.Html.HtmlString((cssClasses.Count == 0) ? "" : (" class=\"" + String.Join(" ", cssClasses.ToArray()) + "\""));
 
+
+
                     <div @classString>
                         @if (node.Enabled)
                         {
@@ -174,20 +199,40 @@
                             {
                                 imActive = "imActive";
                             }
-                            
+
                             <div class="node level-@node.Depth @imActive">
                                 <a href="@node.Url">@node.Text</a>
-                                <span id="children_@id" type="button" class="sidebar__toggle">
-                                    @if (node.Children.Count > 0)
+                                @if (node.Children.Count > 0)
+                                {
+                                    var showUp = "sidebar__toggle--show";
+                                    var showDown = "sidebar__toggle--hide";
+                                    if (openChildren)
                                     {
-                                        <div class="sidebar__toogle__icon">#</div>
+                                        showUp = "sidebar__toggle--hide";
+                                        showDown = "sidebar__toggle--show";
                                     }
-                                </span>
+
+                                    <span id="children_@id" type="button" class="sidebar__toggle float-right">
+                                        <div class="sidebar__toggle__iconup @showUp">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="white" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                            </svg>
+                                        </div>
+                                        <div class="sidebar__toggle__icondown @showDown">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-up-fill" fill="white" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                                            </svg>
+                                        </div>
+                                    </span>
+                                }
                             </div>
                         }
-                        <div class="children_@id @expandedClass">
-                            @{ RenderNodes(node.Children, divGroup); }
-                        </div>
+                        @if (node.Children.Count > 0)
+                        {
+                            <div class="children_@id @expandedClass">
+                                @{ RenderNodes(node.Children, divGroup); }
+                            </div>
+                        }
 
                     </div>
                 }
@@ -202,38 +247,25 @@
 </div>
 
 <script>
-
     window.onload = function loadmyNav() {
-        initGroups();
-        sidebarToggle();
-    };
-
-    function sidebarToggle() {
         $('.sidebar__toggle').click(function () {
-            //var id = $(this).attr("id")
-            //toggleDivGroup(id);
             $(this).parent().next().toggle();
-        })
 
-    }
+            //toggle Icon
+            if ($(this).children('.sidebar__toggle__iconup').hasClass('sidebar__toggle--show')) {
+                $(this).children('.sidebar__toggle__iconup').removeClass('sidebar__toggle--show');
+                $(this).children('.sidebar__toggle__iconup').addClass('sidebar__toggle--hide');
+                $(this).children('.sidebar__toggle__icondown').removeClass('sidebar__toggle--hide');
+                $(this).children('.sidebar__toggle__icondown').addClass('sidebar__toggle--show');
+            }
+            else {
+                $(this).children('.sidebar__toggle__iconup').addClass('sidebar__toggle--show');
+                $(this).children('.sidebar__toggle__iconup').removeClass('sidebar__toggle--hide');
+                $(this).children('.sidebar__toggle__icondown').addClass('sidebar__toggle--hide');
+                $(this).children('.sidebar__toggle__icondown').removeClass('sidebar__toggle--show');
 
-    function initGroups() {
-        var groupname = $('.selected').attr('class').split(' ').find(function (e) {
-            return e.indexOf('children_' === 0);
-        })
-        console.log(groupname);
-        toggleDivGroup(groupname, true);
-    }
-
-    function toggleDivGroup(groupName, openOnly = false) {
-        $('.' + groupName).children().each(function (index) {
-            if ($(this).hasClass('collapseNode') && !openOnly) {
-                $(this).removeClass('collapseNode');
-                $(this).addClass('expandNode');
-            } else {
-                $(this).removeClass('expandNode');
-                $(this).addClass('collapseNode');
             }
         })
-    }
+    };
+
 </script>
