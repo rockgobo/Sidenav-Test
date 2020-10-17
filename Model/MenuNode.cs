@@ -14,7 +14,7 @@ namespace NepsSidenav.Model
         public bool Enabled { get { return true; } }
         public bool Breadcrumb { get; set; }
         public int Depth { get; set; }
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Url{ get {return "#";} }
         public string Text { get { return "Node "  + Depth + "-" + Id + " " + " "+ (Selected?" (Selected)": "") + (Breadcrumb ? " (Bread)" : ""); } }
     }

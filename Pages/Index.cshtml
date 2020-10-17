@@ -2,26 +2,38 @@
 
 @{
     //TODO Algorithmus für eine Selected Route einbauen
-    List<NepsSidenav.Model.MenuNode> buildTree(int deapth, int count, int currentDeapth = 0)
+    List<NepsSidenav.Model.MenuNode> buildTree(int deapth, int count, int currentDeapth = 0, string seletedRoute="", string currentRoute="")
     {
         List<NepsSidenav.Model.MenuNode> nodes = new List<NepsSidenav.Model.MenuNode>();
         for (int i = 0; i < count; ++i)
         {
+            var _currentRoute = (currentRoute.Equals("") ? "": currentRoute + ",") + i;
             nodes.Add(new Model.MenuNode()
             {
-                Id = i,
-                Breadcrumb = true,
+                Id = _currentRoute,
+                Breadcrumb = isBreadcrump(_currentRoute, seletedRoute),
                 Depth = currentDeapth,
-                Selected = false,
+                Selected = isSelected(_currentRoute, seletedRoute),
                 First = i == 0 ? true : false,
                 Last = i == count - 1 ? true : false,
-                Children = (deapth > currentDeapth) ? buildTree(deapth, count, currentDeapth + 1) : new List<NepsSidenav.Model.MenuNode>()
+                Children = (deapth > currentDeapth) ? buildTree(deapth, count, currentDeapth + 1,seletedRoute, _currentRoute) : new List<NepsSidenav.Model.MenuNode>()
             });
         }
 
         return nodes;
     }
-    var root = buildTree(2, 5, 0);
+
+    bool isSelected(string currentRoute, string selectedRoute)
+    {
+        return selectedRoute.Equals(currentRoute);
+    };
+
+    bool isBreadcrump(string currentRoute, string selectedRoute)
+    {
+        return selectedRoute.StartsWith(currentRoute);
+    };
+
+    var root = buildTree(2, 5, 0, "0,2,1");
 }
 
 @{
