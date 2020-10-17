@@ -1,8 +1,8 @@
 ﻿@page
 
 @{
-
-    List<NepsSidenav.Model.MenuNode> buildTree(int deapth, int count, int currentDeapth = 0, int selecteddeapth = 0, int selectedCount = 0)
+    //TODO Algorithmus für eine Selected Route einbauen
+    List<NepsSidenav.Model.MenuNode> buildTree(int deapth, int count, int currentDeapth = 0)
     {
         List<NepsSidenav.Model.MenuNode> nodes = new List<NepsSidenav.Model.MenuNode>();
         for (int i = 0; i < count; ++i)
@@ -21,137 +21,7 @@
 
         return nodes;
     }
-
-
-    var root = new List<NepsSidenav.Model.MenuNode>()
-{
-        new Model.MenuNode()
-        {
-            Id = 1,
-            Breadcrumb = true,
-            Depth = 0,
-            Selected = false,
-            First = true,
-            Last = false,
-            Children = new List<NepsSidenav.Model.MenuNode>()
-{
-                new Model.MenuNode()
-                {
-                    Id = 1,
-                    Breadcrumb = true,
-                    Depth = 1,
-                    Selected = true,
-                    First = true,
-                    Last = false,
-                    Children = new List<NepsSidenav.Model.MenuNode>()
-            {
-                        new Model.MenuNode()
-                        {
-                            Id = 1,
-                            Breadcrumb = false,
-                            Depth = 2,
-                            Selected = false,
-                            First = true,
-                            Last = false,
-                            Children = new List<Model.MenuNode>()
-                        },
-                        new Model.MenuNode()
-                        {
-                            Id = 2,
-                            Breadcrumb = false,
-                            Depth = 2,
-                            Selected = false,
-                            First = false,
-                            Last = false,
-                            Children = new List<Model.MenuNode>()
-                        },
-                        new Model.MenuNode()
-                        {
-                            Id = 3,
-                            Breadcrumb = false,
-                            Depth = 2,
-                            Selected = false,
-                            First = false,
-                            Last = true,
-                            Children = new List<Model.MenuNode>()
-                        }
-                    }
-                },
-                new Model.MenuNode()
-                {
-                    Id = 2,
-                    Breadcrumb = false,
-                    Depth = 1,
-                    Selected = false,
-                    First = false,
-                    Last = false,
-                    Children = new List<Model.MenuNode>()
-                },
-                new Model.MenuNode()
-                {
-                    Id = 3,
-                    Breadcrumb = false,
-                    Depth = 1,
-                    Selected = false,
-                    First = false,
-                    Last = true,
-                    Children = new List<Model.MenuNode>()
-                }
-            }
-        },
-        new Model.MenuNode()
-        {
-            Id = 2,
-            Breadcrumb = false,
-            Depth = 0,
-            Selected = false,
-            First = false,
-            Last = false,
-            Children = new List<Model.MenuNode>()
-        },
-        new Model.MenuNode()
-        {
-            Id = 3,
-            Breadcrumb = false,
-            Depth = 0,
-            Selected = false,
-            First = false,
-            Last = true,
-            Children = new List<NepsSidenav.Model.MenuNode>()
-{
-                new Model.MenuNode()
-                {
-                    Id = 1,
-                    Breadcrumb = false,
-                    Depth = 1,
-                    Selected = false,
-                    First = true,
-                    Last = false,
-                    Children = new List<Model.MenuNode>()
-                },
-                new Model.MenuNode()
-                {
-                    Id = 2,
-                    Breadcrumb = false,
-                    Depth = 1,
-                    Selected = false,
-                    First = false,
-                    Last = false,
-                    Children = new List<Model.MenuNode>()
-                },
-                new Model.MenuNode()
-                {
-                    Id = 3,
-                    Breadcrumb = false,
-                    Depth = 1,
-                    Selected = false,
-                    First = false,
-                    Last = true,
-                    Children = new List<Model.MenuNode>()
-                }
-            }
-        }
-    };
+    var root = buildTree(2, 5, 0);
 }
 
 @{
