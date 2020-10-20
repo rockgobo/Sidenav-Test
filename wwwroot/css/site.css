@@ -344,32 +344,19 @@ li {
     background-color: white;
 }
 
-/* .first{
-	background-color: rgb(78,120,157);
-
-} */
-
-/* a{
-	background-color: lightcoral;
-} */
 
 .node {
     background-color: rgb(78,120,157);
     padding: 2px 10px 2px 10px;
     font-size: 11pt;
+
 }
 
-    .node a {
-        color: white;
-        text-decoration: none;
-    }
-/* .node:hover{
-	background-color: rgb(255,165,0);
-} */
+.node a {
+    color: white;
+    text-decoration: none;
+}
 
-/* .first,.selected> .node{ 
-	background-color: rgb(255,165,0);
-} */
 
 .SideNavContainer > .first > .node > .SideNavContainer > .node {
     visibility: hidden;
@@ -497,4 +484,18 @@ li {
 
 .sidebar__toggle--hide {
     display: none;
+}
+
+/* FLEXBOX Nodes*/
+.node {
+    display: flex;
+    display: -ms-flexbox;
+}
+
+.node__link {
+    flex: 1 1 auto;
+    /* IE save version of flex-grow: 1, flex-shrink: 1, flex-basis: auto*/
+}
+
+.node__toggle{
 }

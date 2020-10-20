@@ -16,6 +16,6 @@ namespace NepsSidenav.Model
         public int Depth { get; set; }
         public string Id { get; set; }
         public string Url{ get {return "#";} }
-        public string Text { get { return "Node "  + Depth + "-" + Id + " " + " "+ (Selected?" (Selected)": "") + (Breadcrumb ? " (Bread)" : ""); } }
+        public string Text { get { return "Langer Nodename "  + Depth + "-" + Id + " " + " "+ (Selected?" (Selected)": "") + (Breadcrumb ? " (Bread)" : ""); } }
     }
 }
